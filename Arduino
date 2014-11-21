@@ -1,8 +1,14 @@
+#include <Servo.h>
+
+Servo l_servo;
+Servo r_servo;
 
 void setup(){
-  
+   l_servo.attach( 5 );
+   r_servo.attach( 6 );  
 }
 
 void loop(){
-  
+   l_servo.write( pos );
+   r_servo.write( 180 - pos )
 }
