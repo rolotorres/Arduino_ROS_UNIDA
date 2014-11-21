@@ -3,17 +3,18 @@
 Servo l_servo;
 Servo r_servo;
 
+int pos = 0;
+
 void setup(){
    l_servo.attach( 5 );
    r_servo.attach( 6 );  
 }
 
 void loop(){
-   l_servo.write( pos );
-   r_servo.write( 180 - pos ); 
-   delay(2000);
+   adelante( 180 );
+   delay( 3000 );
 
-   l_servo.write( pos );
-   r_servo.write( pos );
-   delay(1000);
+   izquierda( pos );
+   delay( 1000 );
 }
+
