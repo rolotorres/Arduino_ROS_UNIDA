@@ -3,8 +3,6 @@
 Servo l_servo;
 Servo r_servo;
 
-int pos = 0;
-
 void setup(){
    l_servo.attach( 5 );
    r_servo.attach( 6 );  
@@ -18,3 +16,11 @@ void loop(){
    delay( 1000 );
 }
 
+void adelante(int velocidad){
+   l_servo.write( velocidad );
+   r_servo.write( 180 - velocidad ); 
+}
+void atras (int velocidad){
+  l_servo.write( 180 - velocidad );
+  r_servo.write(  velocidad );
+}
