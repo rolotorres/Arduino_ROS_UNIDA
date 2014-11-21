@@ -10,5 +10,10 @@ void setup(){
 
 void loop(){
    l_servo.write( pos );
-   r_servo.write( 180 - pos )
+   r_servo.write( 180 - pos ); 
+   delay(2000);
+
+   l_servo.write( pos );
+   r_servo.write( pos );
+   delay(1000);
 }
