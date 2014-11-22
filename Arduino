@@ -24,3 +24,13 @@ void atras (int velocidad){
   l_servo.write( 180 - velocidad );
   r_servo.write(  velocidad );
 }
+
+void izquierda(int velocidad){
+  l_servo.write( velocidad );
+  r_servo.write( velocidad );
+}
+
+void derecha(int velocidad){
+  l_servo.write( 180-velocidad );
+  r_servo.write( 180-velocidad );
+}
