@@ -1,19 +1,31 @@
+#if ( ARDUINO >= 100 )
+   #include <Arduino.h>
+#else
+   #include <WProgram.h>
+#endif
+
 #include <Servo.h>
+#include <ros.h>
+#include <geometry_msgs/Twist>
+
+ros::NodeHandle nh;
 
 Servo l_servo;
 Servo r_servo;
 
 void setup(){
+   pinMode( 13, OUTPUT );
+	
+   nh.initNode();
+   nh.subscribe(sub);
+
    l_servo.attach( 5 );
    r_servo.attach( 6 );  
 }
 
 void loop(){
-   adelante( 180 );
-   delay( 3000 );
-
-   izquierda( pos );
-   delay( 1000 );
+   nh.spinOnce();
+   delay( 1 );
 }
 
 void adelante(int velocidad){
@@ -21,16 +33,16 @@ void adelante(int velocidad){
    r_servo.write( 180 - velocidad ); 
 }
 void atras (int velocidad){
-  l_servo.write( 180 - velocidad );
-  r_servo.write(  velocidad );
+   l_servo.write( 180 - velocidad );
+   r_servo.write(  velocidad );
 }
 
 void izquierda(int velocidad){
-  l_servo.write( velocidad );
-  r_servo.write( velocidad );
+   l_servo.write( velocidad );
+   r_servo.write( velocidad );
 }
 
 void derecha(int velocidad){
-  l_servo.write( 180-velocidad );
-  r_servo.write( 180-velocidad );
+   l_servo.write( 180-velocidad );
+   r_servo.write( 180-velocidad );
 }
