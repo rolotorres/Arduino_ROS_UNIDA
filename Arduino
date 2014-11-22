@@ -13,6 +13,23 @@ ros::NodeHandle nh;
 Servo l_servo;
 Servo r_servo;
 
+void servo_cb( const geometry_msgs::Twist& cmd_msg ){
+  if ( cmd_msg->angular.z == 0 && cmd->linear.x == 0 ){
+	//parar
+  } else {
+	if ( cmd_msg->angular.z < 1 ){
+		//derecha
+	} else if ( cmd_msg->angular.z > 1 ){
+		//izquierda
+	} else if ( cmd_msg->linear.x < 1 ){
+		// atras
+	} else if ( cmd_msg->linear.x > 1 ){
+		//adelante
+	}
+  }
+   digitalWrite( 13, HIGH-digitalRead( 13 ));
+}
+
 void setup(){
    pinMode( 13, OUTPUT );
 	
