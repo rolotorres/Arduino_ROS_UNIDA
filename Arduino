@@ -14,21 +14,24 @@ Servo l_servo;
 Servo r_servo;
 
 void servo_cb( const geometry_msgs::Twist& cmd_msg ){
-  if ( cmd_msg->angular.z == 0 && cmd->linear.x == 0 ){
-	//parar
+  if ( cmd_msg.angular.z == 0 && cmd_msg.linear.x == 0 ){
+	l_servo.write( 90 );
+	r_servo.write( 90 );
   } else {
-	if ( cmd_msg->angular.z < 1 ){
-		//derecha
-	} else if ( cmd_msg->angular.z > 1 ){
-		//izquierda
-	} else if ( cmd_msg->linear.x < 1 ){
-		// atras
-	} else if ( cmd_msg->linear.x > 1 ){
-		//adelante
+	if ( cmd_msg.angular.z < 0 ){
+                derecha( int (cmd_msg.angular.z * - 180 ));
+	} else if ( cmd_msg.angular.z > 0 ){
+		izquierda( int (cmd_msg.angular.z * 180));
+	} else if ( cmd_msg.linear.x < 0 ){
+	        atras( int (cmd_msg.linear.x * -180));
+	} else if ( cmd_msg.linear.x > 0 ){
+		adelante( int (cmd_msg.linear.x * 180));
 	}
   }
-   digitalWrite( 13, HIGH-digitalRead( 13 ));
+   digitalWrite( 13, HIGH-digitalRead( 13 ) );
 }
+
+ros::Subscriber<geometry_msgs::Twist> sub( "cmd_vel", servo_cb ); 
 
 void setup(){
    pinMode( 13, OUTPUT );
@@ -60,6 +63,6 @@ void izquierda(int velocidad){
 }
 
 void derecha(int velocidad){
-   l_servo.write( 180-velocidad );
-   r_servo.write( 180-velocidad );
+   l_servo.write( 180 - velocidad );
+   r_servo.write( 180 - velocidad );
 }
